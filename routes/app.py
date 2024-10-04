@@ -142,7 +142,7 @@ def get_profile(profile_id: str, db: Session = Depends(get_db), authorization: s
     profile = find_profile(db, profile_id)
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
-    base_url = "http://localhost:8000"
+    base_url = "https://web-production-df28.up.railway.app"
     profile.picture = construct_full_picture_url(profile.picture, base_url)
     return profile
 
@@ -191,7 +191,7 @@ def find_properties(db: Session = Depends(get_db), authorization: str = Header(N
         raise HTTPException(status_code=401, detail="Invalid token")
     
     properties = get_properties(db)
-    base_url = "http://localhost:8000"
+    base_url = "https://web-production-df28.up.railway.app"
     for property in properties:
         property.image = construct_full_picture_url(property.image, base_url)
     return properties
